@@ -38,9 +38,26 @@ public class NoticiaService {
 
     public NoticiaDTO getNoticiaById(Long id) {
         Noticia noticia = noticiaRepo.findById(id).orElseThrow(
-                () -> new NotFoundException("Noticia con el id '" + id + "' no encontrado"));
+                () -> new NotFoundException("Noticia con el id '" + id + "' no encontrada"));
 
         return toDTO(noticia);
+    }
+
+    public void deleteNoticiaById(Long id) {
+        if (!noticiaRepo.existsById(id)) {
+            throw new NotFoundException("Noticia con el id '" + id + "' no encontrada");
+        }
+        noticiaRepo.deleteById(id);
+    }
+
+    public void editNoticia(Long id, NoticiaDTO noticiaDTO) {
+        if (!noticiaRepo.existsById(id)) {
+            throw new NotFoundException("Noticia con id '" + id + "' no encontrada");
+        }
+
+        Noticia noticia = toEntity(noticiaDTO);
+        noticia.setId(id);
+        noticiaRepo.save(noticia);
     }
 
     // Mappers
