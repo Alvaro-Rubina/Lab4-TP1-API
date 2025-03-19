@@ -1,20 +1,18 @@
 package org.alvarub.lab4tp1api.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter
 @Builder
+@Entity
 public class Empresa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(length = 128, nullable = false)
     private String denominacion;
@@ -36,4 +34,5 @@ public class Empresa {
 
     @Column(length = 75)
     private String email;
+
 }
