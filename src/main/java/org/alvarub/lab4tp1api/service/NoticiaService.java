@@ -4,6 +4,7 @@ import org.alvarub.lab4tp1api.config.exception.NotFoundException;
 import org.alvarub.lab4tp1api.model.dto.NoticiaDTO;
 import org.alvarub.lab4tp1api.model.entity.Empresa;
 import org.alvarub.lab4tp1api.model.entity.Noticia;
+import org.alvarub.lab4tp1api.repository.EmpresaRepository;
 import org.alvarub.lab4tp1api.repository.NoticiaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class NoticiaService {
     private NoticiaRepository noticiaRepo;
 
     @Autowired
-    private EmpresaService empresaService;
+    private EmpresaRepository empresaRepo;
 
     //
     public void saveNoticia(NoticiaDTO noticiaDTO) {
@@ -70,10 +71,14 @@ public class NoticiaService {
                 .contenidoHTML(noticia.getContenidoHtml())
                 .publicada(noticia.isPublicada())
                 .fechaPublicacion(noticia.getFechaPublicacion())
+                .idEmpresa(noticia.getEmpresa().getId())
                 .build();
     }
 
     public Noticia toEntity(NoticiaDTO noticiaDTO) {
+
+        Empresa empresa = empresaRepo.findById(noticiaDTO.getIdEmpresa())
+                .orElseThrow(() -> new NotFoundException("Empresa con el id '" + noticiaDTO.getIdEmpresa() + "' no encontrada"));
 
         return Noticia.builder()
                 .titulo(noticiaDTO.getTitulo())
@@ -82,6 +87,7 @@ public class NoticiaService {
                 .contenidoHtml(noticiaDTO.getContenidoHTML())
                 .publicada(noticiaDTO.isPublicada())
                 .fechaPublicacion(noticiaDTO.getFechaPublicacion())
+                .empresa(empresa)
                 .build();
     }
 }
