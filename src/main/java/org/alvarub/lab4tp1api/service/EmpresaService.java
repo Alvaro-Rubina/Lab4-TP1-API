@@ -57,15 +57,14 @@ public class EmpresaService {
     }
 
     public EmpresaDTO getEmpresa(Long id) {
-Empresa empresa = empresaRepository.findById(id).orElseThrow(
+        Empresa empresa = empresaRepository.findById(id).orElseThrow(
         ()-> new NotFoundException("Empresa con el id " + id + " no encontrada")
         );
-return toDTO(empresa);
+        return toDTO(empresa);
 
     }
 
     public EmpresaDTO toDTO(Empresa empresa) {
-        EmpresaDTO empresaDTO = new EmpresaDTO();
 
         return EmpresaDTO.builder()
                 .denominacion(empresa.getDenominacion())
@@ -78,6 +77,7 @@ return toDTO(empresa);
                 .email(empresa.getEmail())
                 .build();
     }
+
     public Empresa toEntity(EmpresaDTO empresaDTO){
         return Empresa.builder()
                 .denominacion(empresaDTO.getDenominacion())
