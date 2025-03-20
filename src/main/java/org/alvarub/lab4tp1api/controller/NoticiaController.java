@@ -41,7 +41,7 @@ public class NoticiaController {
         return ResponseEntity.ok("Noticia editada con exito");
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteNoticia(@PathVariable Long id) {
         noticiaService.deleteNoticiaById(id);
         return ResponseEntity.ok("Noticia eliminada con exito");

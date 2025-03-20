@@ -37,7 +37,7 @@ public class EmpresaController {
         return ResponseEntity.ok("Empresaeditada con exito)");
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarEmpresa(@PathVariable Long id){
         empresaService.eliminarEmpresa(id);
         return ResponseEntity.ok("Empresa eliminada con exito");
