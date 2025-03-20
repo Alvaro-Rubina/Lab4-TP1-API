@@ -68,6 +68,7 @@ return toDTO(empresa);
         EmpresaDTO empresaDTO = new EmpresaDTO();
 
         return EmpresaDTO.builder()
+                .id(empresa.getId())
                 .denominacion(empresa.getDenominacion())
                 .telefono(empresa.getTelefono())
                 .horarioDeAtencion(empresa.getHorarioAtencion())
