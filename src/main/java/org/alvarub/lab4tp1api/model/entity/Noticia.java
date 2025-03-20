@@ -9,11 +9,12 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter @Setter
 @Builder
+@Entity
 public class Noticia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(length = 128, nullable = false)
     private String titulo;
@@ -27,8 +28,7 @@ public class Noticia {
     @Column(length = 20480)
     private String contenidoHtml;
 
-    @Column(length = 1)
-    private char publicada;
+    private boolean publicada;
 
     @Temporal(TemporalType.DATE)
     private LocalDate fechaPublicacion;

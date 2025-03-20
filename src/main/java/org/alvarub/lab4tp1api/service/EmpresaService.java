@@ -1,13 +1,12 @@
 package org.alvarub.lab4tp1api.service;
 
-import org.alvarub.lab4tp1api.EmpresaDTO;
+import org.alvarub.lab4tp1api.model.dto.EmpresaDTO;
 import org.alvarub.lab4tp1api.model.entity.Empresa;
 import org.alvarub.lab4tp1api.repository.EmpresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EmpresaService {
