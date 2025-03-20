@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @Builder
 public class NoticiaDTO {
 
+    private Long id;
     private String titulo;
     private String resumen;
     private String imagen;

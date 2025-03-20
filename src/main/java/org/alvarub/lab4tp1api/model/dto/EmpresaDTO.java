@@ -8,6 +8,7 @@ import lombok.*;
 @Setter
 @Builder
 public class EmpresaDTO {
+
     private Long id;
     private String denominacion;
     private String telefono;

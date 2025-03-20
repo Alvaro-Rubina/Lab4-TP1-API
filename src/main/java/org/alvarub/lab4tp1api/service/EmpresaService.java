@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EmpresaService {
@@ -20,8 +19,6 @@ public class EmpresaService {
     public void agregarEmpresa(EmpresaDTO empresaDTO) {
         Empresa empresa = toEntity(empresaDTO);
         empresaRepository.save(empresa);
-
-
     }
 
     public void actualizarEmpresa(Long id,EmpresaDTO empresaDTO) {
@@ -31,18 +28,13 @@ public class EmpresaService {
         Empresa empresa = toEntity(empresaDTO);
         empresa.setId(id);
         empresaRepository.save(empresa);
-
-
-
     }
 
     public void eliminarEmpresa(Long id) {
         if(!empresaRepository.existsById(id)){
             throw new NotFoundException("Empresa con id " + id + "no encontrada");
-
         }
         empresaRepository.deleteById(id);
-
     }
 
     public List<EmpresaDTO> getEmpresas() {
@@ -53,15 +45,12 @@ public class EmpresaService {
             empresaDTOS.add(toDTO(empresa));
         }
         return empresaDTOS;
-
     }
 
     public EmpresaDTO getEmpresa(Long id) {
-        Empresa empresa = empresaRepository.findById(id).orElseThrow(
-        ()-> new NotFoundException("Empresa con el id " + id + " no encontrada")
-        );
+        Empresa empresa = empresaRepository.findById(id)
+                .orElseThrow(()-> new NotFoundException("Empresa con el id " + id + " no encontrada"));
         return toDTO(empresa);
-
     }
 
     public EmpresaDTO toDTO(Empresa empresa) {

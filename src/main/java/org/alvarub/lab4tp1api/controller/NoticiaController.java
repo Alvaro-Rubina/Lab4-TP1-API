@@ -11,7 +11,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/api/noticias")
-@CrossOrigin(origins = "http://127.0.0.1:5500") // Permitir solicitudes desde el frontend
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 public class NoticiaController {
 
     @Autowired

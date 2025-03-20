@@ -67,6 +67,7 @@ public class NoticiaService {
     public NoticiaDTO toDTO(Noticia noticia) {
 
         return NoticiaDTO.builder()
+                .id(noticia.getId())
                 .titulo(noticia.getTitulo())
                 .resumen(noticia.getResumen())
                 .imagen(noticia.getImagen())
