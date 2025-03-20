@@ -7,8 +7,10 @@ import org.alvarub.lab4tp1api.model.entity.Noticia;
 import org.alvarub.lab4tp1api.repository.EmpresaRepository;
 import org.alvarub.lab4tp1api.repository.NoticiaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,6 +81,7 @@ public class NoticiaService {
 
         Empresa empresa = empresaRepo.findById(noticiaDTO.getIdEmpresa())
                 .orElseThrow(() -> new NotFoundException("Empresa con el id '" + noticiaDTO.getIdEmpresa() + "' no encontrada"));
+        LocalDate fechaPubicacion = LocalDate.now();
 
         return Noticia.builder()
                 .titulo(noticiaDTO.getTitulo())
@@ -86,7 +89,7 @@ public class NoticiaService {
                 .imagen(noticiaDTO.getImagen())
                 .contenidoHtml(noticiaDTO.getContenidoHTML())
                 .publicada(noticiaDTO.isPublicada())
-                .fechaPublicacion(noticiaDTO.getFechaPublicacion())
+                .fechaPublicacion(fechaPubicacion)
                 .empresa(empresa)
                 .build();
     }
