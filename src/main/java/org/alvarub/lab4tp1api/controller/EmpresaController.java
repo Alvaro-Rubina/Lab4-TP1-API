@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller("/api/empresas")
+@Controller
+@RequestMapping("/api/empresas")
 public class EmpresaController {
+
     @Autowired
     private EmpresaService empresaService;
+
     @PostMapping
     public ResponseEntity<String> agregarEmpresa(@RequestBody EmpresaDTO empresaDTO){
         empresaService.agregarEmpresa(empresaDTO);
@@ -37,7 +40,7 @@ public class EmpresaController {
         return ResponseEntity.ok("Empresaeditada con exito)");
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> eliminarEmpresa(@PathVariable Long id){
         empresaService.eliminarEmpresa(id);
         return ResponseEntity.ok("Empresa eliminada con exito");

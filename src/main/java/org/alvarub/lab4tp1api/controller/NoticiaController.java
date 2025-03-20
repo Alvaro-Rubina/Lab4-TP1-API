@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller("/api/noticias")
+@Controller
+@RequestMapping("/api/noticias")
 public class NoticiaController {
 
     @Autowired
@@ -41,7 +42,7 @@ public class NoticiaController {
         return ResponseEntity.ok("Noticia editada con exito");
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteNoticia(@PathVariable Long id) {
         noticiaService.deleteNoticiaById(id);
         return ResponseEntity.ok("Noticia eliminada con exito");
