@@ -1,6 +1,6 @@
 package org.alvarub.lab4tp1api.service;
 
-import org.alvarub.lab4tp1api.EmpresaDTO;
+import org.alvarub.lab4tp1api.model.dto.EmpresaDTO;
 import org.alvarub.lab4tp1api.config.exception.NotFoundException;
 import org.alvarub.lab4tp1api.model.entity.Empresa;
 import org.alvarub.lab4tp1api.repository.EmpresaRepository;

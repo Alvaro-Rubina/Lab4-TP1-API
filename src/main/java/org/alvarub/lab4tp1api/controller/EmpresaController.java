@@ -1,6 +1,6 @@
 package org.alvarub.lab4tp1api.controller;
 
-import org.alvarub.lab4tp1api.EmpresaDTO;
+import org.alvarub.lab4tp1api.model.dto.EmpresaDTO;
 import org.alvarub.lab4tp1api.service.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
