@@ -67,6 +67,7 @@ public class EmpresaService {
     public EmpresaDTO toDTO(Empresa empresa) {
 
         return EmpresaDTO.builder()
+                .id(empresa.getId())
                 .denominacion(empresa.getDenominacion())
                 .telefono(empresa.getTelefono())
                 .horarioDeAtencion(empresa.getHorarioAtencion())

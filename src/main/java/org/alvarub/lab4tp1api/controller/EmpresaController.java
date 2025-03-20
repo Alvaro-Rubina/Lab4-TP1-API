@@ -11,6 +11,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/api/empresas")
+@CrossOrigin(origins = "http://127.0.0.1:5500") // Permitir solicitudes desde el frontend
 public class EmpresaController {
 
     @Autowired
@@ -21,6 +22,7 @@ public class EmpresaController {
         empresaService.agregarEmpresa(empresaDTO);
         return ResponseEntity.ok("Empresa registrada con exito");
     }
+
     @GetMapping("/{id}")
     @ResponseBody
     public ResponseEntity<EmpresaDTO> getEmpresaById(@PathVariable Long id){
