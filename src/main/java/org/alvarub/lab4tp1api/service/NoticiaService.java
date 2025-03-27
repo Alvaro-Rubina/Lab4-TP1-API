@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class NoticiaService {
@@ -44,6 +45,13 @@ public class NoticiaService {
                 () -> new NotFoundException("Noticia con el id '" + id + "' no encontrada"));
 
         return toDTO(noticia);
+    }
+
+    public List<NoticiaDTO> getNoticiasByEmpresa(Long idEmpresa) {
+        List<Noticia> noticias = noticiaRepo.findByEmpresaId(idEmpresa);
+        return noticias.stream()
+                .map(this::toDTO) // Usa el método toDTO para convertir cada entidad Noticia a NoticiaDTO
+                .collect(Collectors.toList());
     }
 
     public void deleteNoticiaById(Long id) {
