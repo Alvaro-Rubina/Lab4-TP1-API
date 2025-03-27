@@ -29,13 +29,10 @@ public class NoticiaController {
         NoticiaDTO noticiaDTO = noticiaService.getNoticiaById(id);
         return ResponseEntity.ok(noticiaDTO);
     }
-    
+
     @GetMapping
     @ResponseBody
-    public List<NoticiaDTO> getNoticias(@RequestParam(required = false) Long idEmpresa) {
-        if (idEmpresa != null) {
-            return noticiaService.getNoticiasByEmpresa(idEmpresa);
-        }
+    public List<NoticiaDTO> getNoticias() {
         return noticiaService.getAllNoticias();
     }
 
