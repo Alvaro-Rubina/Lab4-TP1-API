@@ -52,4 +52,12 @@ public class NoticiaController {
         return ResponseEntity.ok("Noticia eliminada con exito");
     }
 
+    // Endpoint para buscar noticias por texto
+    @GetMapping("/buscar")
+    @ResponseBody
+    public ResponseEntity<List<NoticiaDTO>> buscarNoticias(@RequestParam String texto) {
+        List<NoticiaDTO> noticias = noticiaService.getNoticiasByTexto(texto);
+        return ResponseEntity.ok(noticias);
+    }
+
 }

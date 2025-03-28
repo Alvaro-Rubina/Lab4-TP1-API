@@ -71,6 +71,14 @@ public class NoticiaService {
         noticiaRepo.save(noticia);
     }
 
+    // Método para buscar noticias por texto
+    public List<NoticiaDTO> getNoticiasByTexto(String texto) {
+        List<Noticia> noticias = noticiaRepo.findByTexto(texto);
+        return noticias.stream()
+                .map(this::toDTO) // Convierte cada entidad Noticia a NoticiaDTO
+                .collect(Collectors.toList());
+    }
+
     // Mappers
     public NoticiaDTO toDTO(Noticia noticia) {
 
