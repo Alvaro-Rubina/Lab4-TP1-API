@@ -32,12 +32,10 @@ public class NoticiaService {
 
     public List<NoticiaDTO> getAllNoticias() {
         List<Noticia> noticias = noticiaRepo.findAll();
-        List<NoticiaDTO> noticiasDTO = new ArrayList<>();
-
-        for (Noticia noticia : noticias) {
-            noticiasDTO.add(toDTO(noticia));
-        }
-        return noticiasDTO;
+        return noticias.stream()
+                .sorted((n1, n2) -> n2.getFechaPublicacion().compareTo(n1.getFechaPublicacion()))
+                .map(this::toDTO)
+                .collect(Collectors.toList());
     }
 
     public NoticiaDTO getNoticiaById(Long id) {
@@ -50,7 +48,9 @@ public class NoticiaService {
     public List<NoticiaDTO> getNoticiasByEmpresa(Long idEmpresa) {
         List<Noticia> noticias = noticiaRepo.findByEmpresaId(idEmpresa);
         return noticias.stream()
-                .map(this::toDTO) // Usa el método toDTO para convertir cada entidad Noticia a NoticiaDTO
+                .filter(Noticia::isPublicada)
+                .sorted((n1, n2) -> n2.getFechaPublicacion().compareTo(n1.getFechaPublicacion()))
+                .map(this::toDTO)
                 .collect(Collectors.toList());
     }
 
@@ -95,10 +95,10 @@ public class NoticiaService {
     }
 
     public Noticia toEntity(NoticiaDTO noticiaDTO) {
-
         Empresa empresa = empresaRepo.findById(noticiaDTO.getIdEmpresa())
                 .orElseThrow(() -> new NotFoundException("Empresa con el id '" + noticiaDTO.getIdEmpresa() + "' no encontrada"));
-        LocalDate fechaPubicacion = LocalDate.now();
+
+        LocalDate fechaPublicacion = (noticiaDTO.getFechaPublicacion() == null) ? LocalDate.now() : noticiaDTO.getFechaPublicacion();
 
         return Noticia.builder()
                 .titulo(noticiaDTO.getTitulo())
@@ -106,7 +106,7 @@ public class NoticiaService {
                 .imagen(noticiaDTO.getImagen())
                 .contenidoHtml(noticiaDTO.getContenidoHTML())
                 .publicada(noticiaDTO.isPublicada())
-                .fechaPublicacion(fechaPubicacion)
+                .fechaPublicacion(fechaPublicacion)
                 .empresa(empresa)
                 .build();
     }
